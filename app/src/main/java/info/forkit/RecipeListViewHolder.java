@@ -5,11 +5,11 @@ import android.view.View;
 import android.widget.TextView;
 
 
-public class RecipeViewHolder extends RecyclerView.ViewHolder {
+public class RecipeListViewHolder extends RecyclerView.ViewHolder {
 
     private TextView textView;
 
-    public RecipeViewHolder(View itemView) {
+    public RecipeListViewHolder(View itemView) {
         super(itemView);
         textView = (TextView) itemView.findViewById(R.id.text_name);
     }

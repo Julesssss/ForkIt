@@ -8,19 +8,19 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class RecipeListAdapter extends RecyclerView.Adapter<RecipeViewHolder> {
+public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListViewHolder> {
 
     private ArrayList<Recipe> list = new ArrayList<>();
 
     @Override
-    public RecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecipeListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_view, parent, false);
-        return new RecipeViewHolder(view);
+        return new RecipeListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecipeViewHolder holder, final int position) {
+    public void onBindViewHolder(RecipeListViewHolder holder, final int position) {
         holder.setText(list.get(position).getName());
         holder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,14 +35,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeViewHolder> {
         return list.size();
     }
 
-    public void addRecipe(Recipe recipe) {
-        list.add(recipe);
+    public void setRecipes(ArrayList<Recipe> recipes) {
+        list = recipes;
         notifyDataSetChanged();
     }
-
-    public void clearRecipes() {
-        list.clear();
-        notifyDataSetChanged();
-    }
-
 }
