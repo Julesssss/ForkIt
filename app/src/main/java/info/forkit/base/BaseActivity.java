@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import butterknife.ButterKnife;
 import info.forkit.R;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     protected final String TAG = this.getClass().getSimpleName();
 

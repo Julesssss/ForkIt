@@ -110,7 +110,17 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView, 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Snackbar.make(recyclerView, message, Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(fabAdd, message, Snackbar.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void showMessage(final int stringID) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Snackbar.make(fabAdd, getString(stringID), Snackbar.LENGTH_SHORT).show();
             }
         });
     }

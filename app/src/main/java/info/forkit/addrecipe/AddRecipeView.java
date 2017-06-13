@@ -1,10 +1,8 @@
 package info.forkit.addrecipe;
 
-public interface AddRecipeView {
+import info.forkit.base.BaseView;
 
-    void showProgressBar(boolean visible);
+public interface AddRecipeView extends BaseView {
 
-    void showMessage(String message);
 
-    void showMessage(int stringID);
 }
