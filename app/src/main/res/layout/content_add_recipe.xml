@@ -4,30 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="info.forkit.RecipeListActivity">
+    android:background="@color/colorPrimaryLight"
+    android:padding="@dimen/activity_padding"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="info.forkit.AddRecipeActivity"
+    tools:showIn="@layout/activity_add_recipe">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <EditText
+        android:id="@+id/edittext_recipe_name"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_recipe_edittext_name_hint"
+        android:maxLines="1"
+        android:inputType="text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add_recipe"
+    <Button
+        android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@mipmap/ic_launcher"
+        android:layout_marginBottom="32dp"
+        android:text="@string/add_recipe_button_label"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="Save" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

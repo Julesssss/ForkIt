@@ -1,12 +1,5 @@
 package info.forkit;
 
-import android.util.Log;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 
 public class RecipeListPresenter {
@@ -20,7 +13,7 @@ public class RecipeListPresenter {
         getDataSet();
     }
 
-    public void reattachView(RecipeListActivity recipeListActivity) {
+    public void reattachView(RecipeListView recipeListActivity) {
         this.view = recipeListActivity;
         getDataSet();
     }
@@ -42,26 +35,17 @@ public class RecipeListPresenter {
 
     private void getRecipes() {
         view.showProgressBar(true);
-        // todo: refactor this to FB helper
-        DatabaseReference recipesDatabase = ForkIt.getInstance().getDatabase().getReference("list").child("recipes");
-        recipesDatabase.addValueEventListener(new ValueEventListener() {
+        FirebaseHelper firebaseHelper = new FirebaseHelper(); // todo: dependency injection
+        firebaseHelper.getRecipeList(new FirebaseHelper.LoadRecipesCallback() { // todo: use retrolamda
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<Recipe> recipes = new ArrayList<>();
-
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Recipe recipe = ds.getValue(Recipe.class);
-                    recipes.add(recipe);
-                }
+            public void getRecipes(ArrayList<Recipe> recipes) {
                 view.setRecipes(recipes);
                 view.showProgressBar(false);
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Failed to read value
-                Log.w(TAG, "Database error: ", databaseError.toException());
-                view.showMessage(databaseError.getMessage());
+            public void onCancelled(String message) {
+                view.showMessage(message);
             }
         });
     }

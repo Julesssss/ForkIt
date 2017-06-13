@@ -6,7 +6,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ForkIt extends Application {
 
-
     private static ForkIt sInstance;
     private FirebaseDatabase database;
 
@@ -18,11 +17,11 @@ public class ForkIt extends Application {
 
 
     public FirebaseDatabase getDatabase() {
-        if (database == null)
+        if (database == null) {
             database = FirebaseDatabase.getInstance();
+            database.setPersistenceEnabled(true);
+        }
         return database;
-//                DatabaseReference myRef = database.getReference("message");
-
     }
 
     public static ForkIt getInstance() {

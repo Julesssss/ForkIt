@@ -1,5 +1,6 @@
 package info.forkit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,13 +28,8 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView {
     private RecipeListPresenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public int getLayout() {
-        return R.layout.activity_list;
+        return R.layout.activity_recipe_list;
     }
 
     @Override
@@ -43,7 +38,8 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(RecipeListActivity.this, "Create new Recipe", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RecipeListActivity.this, AddRecipeActivity.class);
+                startActivity(intent);
             }
         });
         recipeListAdapter = new RecipeListAdapter();
@@ -75,6 +71,7 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView {
 
     /*
      * This is how we maintain the Presenter state through rotation. Simple but fine for our usage
+     * // todo MOVE TO BASE ACTIVITY
      */
     @Override
     public Object onRetainCustomNonConfigurationInstance() {

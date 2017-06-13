@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ForkIt</string>
+
+    <string name="add_recipe_activity_title">Add Recipe</string>
+    <string name="add_recipe_edittext_name_hint">Recipe name</string>
+    <string name="add_recipe_button_label">Save</string>
+    <string name="add_recipe_message_completed">Recipe saved!</string>
+    <string name="add_recipe_message_name_empty">Please enter a name</string>
 </resources>
