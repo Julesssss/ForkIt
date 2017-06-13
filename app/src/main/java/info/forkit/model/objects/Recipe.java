@@ -1,4 +1,4 @@
-package info.forkit;
+package info.forkit.model.objects;
 
 public class Recipe {
 

@@ -1,9 +1,10 @@
-package info.forkit;
+package info.forkit.recipelist;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import info.forkit.R;
 
 public class RecipeListViewHolder extends RecyclerView.ViewHolder {
 

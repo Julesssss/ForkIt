@@ -1,4 +1,4 @@
-package info.forkit;
+package info.forkit.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import butterknife.ButterKnife;
+import info.forkit.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 

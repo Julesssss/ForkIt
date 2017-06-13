@@ -1,6 +1,7 @@
-package info.forkit;
+package info.forkit.recipelist;
 
 import java.util.ArrayList;
+import info.forkit.model.objects.Recipe;
 
 public interface RecipeListView {
 

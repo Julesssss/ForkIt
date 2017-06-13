@@ -1,4 +1,4 @@
-package info.forkit;
+package info.forkit.model.database;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -6,12 +6,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
+import info.forkit.ForkIt;
+import info.forkit.model.objects.Recipe;
 
 public class FirebaseHelper {
 
-    interface LoadRecipesCallback {
+    public interface LoadRecipesCallback {
         void getRecipes(ArrayList<Recipe> recipes);
         void onCancelled(String message);
     }
@@ -36,7 +37,7 @@ public class FirebaseHelper {
         });
     }
 
-    interface SaveRecipeCallback {
+    public interface SaveRecipeCallback {
         void onCompleted();
     }
 

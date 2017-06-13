@@ -1,4 +1,4 @@
-package info.forkit;
+package info.forkit.model.database;
 
 public class FirebaseKeys {
 

@@ -1,6 +1,10 @@
-package info.forkit;
+package info.forkit.addrecipe;
 
 import android.text.TextUtils;
+
+import info.forkit.model.database.FirebaseHelper;
+import info.forkit.R;
+import info.forkit.model.objects.Recipe;
 
 public class AddRecipePresenter {
 

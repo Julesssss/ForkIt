@@ -1,7 +1,6 @@
-package info.forkit;
+package info.forkit.recipelist;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,8 +11,12 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import info.forkit.base.BaseActivity;
+import info.forkit.R;
+import info.forkit.model.objects.Recipe;
+import info.forkit.addrecipe.AddRecipeActivity;
 
-public class RecipeListActivity extends BaseActivity implements RecipeListView {
+public class RecipeListActivity extends BaseActivity implements RecipeListView, RecipeListAdapter.ListItemCallback {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -42,7 +45,7 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView {
                 startActivity(intent);
             }
         });
-        recipeListAdapter = new RecipeListAdapter();
+        recipeListAdapter = new RecipeListAdapter(this);
         recyclerView.setAdapter(recipeListAdapter);
 
         attachPresenter();
@@ -71,7 +74,6 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView {
 
     /*
      * This is how we maintain the Presenter state through rotation. Simple but fine for our usage
-     * // todo MOVE TO BASE ACTIVITY
      */
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
@@ -113,5 +115,12 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView {
         });
     }
 
+    /**
+     * Adapter methods
+     */
 
+    @Override
+    public void listItemClicked(Recipe recipe) {
+        presenter.onRecipeClicked(recipe);
+    }
 }

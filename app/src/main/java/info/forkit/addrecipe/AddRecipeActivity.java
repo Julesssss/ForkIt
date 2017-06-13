@@ -1,4 +1,4 @@
-package info.forkit;
+package info.forkit.addrecipe;
 
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import butterknife.BindView;
+import info.forkit.base.BaseActivity;
+import info.forkit.R;
 
 public class AddRecipeActivity extends BaseActivity implements AddRecipeView, View.OnClickListener {
 

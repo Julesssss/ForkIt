@@ -1,6 +1,9 @@
-package info.forkit;
+package info.forkit.recipelist;
 
 import java.util.ArrayList;
+
+import info.forkit.model.database.FirebaseHelper;
+import info.forkit.model.objects.Recipe;
 
 public class RecipeListPresenter {
 
@@ -50,4 +53,7 @@ public class RecipeListPresenter {
         });
     }
 
+    public void onRecipeClicked(Recipe recipe) {
+        view.showMessage("Selected: " + recipe.getName());
+    }
 }

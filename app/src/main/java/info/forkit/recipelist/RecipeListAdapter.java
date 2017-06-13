@@ -1,16 +1,27 @@
-package info.forkit;
+package info.forkit.recipelist;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import info.forkit.R;
+import info.forkit.model.objects.Recipe;
+
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListViewHolder> {
 
+    final private ListItemCallback callback;
     private ArrayList<Recipe> list = new ArrayList<>();
+
+    interface ListItemCallback {
+        void listItemClicked(Recipe recipe);
+    }
+
+    public RecipeListAdapter(ListItemCallback callback) {
+        this.callback = callback;
+    }
 
     @Override
     public RecipeListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -20,12 +31,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListViewHolder
     }
 
     @Override
-    public void onBindViewHolder(RecipeListViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecipeListViewHolder holder, final int position) {
         holder.setText(list.get(position).getName());
         holder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ForkIt.getInstance(), list.get(position).getName(), Toast.LENGTH_SHORT).show();
+                callback.listItemClicked(list.get(holder.getAdapterPosition()));
             }
         });
     }
