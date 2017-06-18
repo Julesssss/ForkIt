@@ -32,8 +32,8 @@ public class FirebaseHelper {
         void onCancelled(String message);
     }
 
-    public void getRecipeList(final LoadRecipesCallback callback) {
-        DatabaseReference recipesDatabase = ForkIt.getInstance().getDatabase().getReference(FirebaseKeys.TABLE_LIST).child(FirebaseKeys.TABLE_RECIPES);
+    public void getRecipeList(final String userId, final LoadRecipesCallback callback) {
+        DatabaseReference recipesDatabase = ForkIt.getInstance().getDatabase().getReference(FirebaseKeys.TABLE_RECIPES).child(userId);
         recipesDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -56,8 +56,8 @@ public class FirebaseHelper {
         void onCompleted();
     }
 
-    public void saveNewRecipe(final Recipe recipe, final SaveRecipeCallback callback) {
-        DatabaseReference recipesDatabase = ForkIt.getInstance().getDatabase().getReference(FirebaseKeys.TABLE_LIST).child(FirebaseKeys.TABLE_RECIPES).push();
+    public void saveNewRecipe(final Recipe recipe, final String userId, final SaveRecipeCallback callback) {
+        DatabaseReference recipesDatabase = ForkIt.getInstance().getDatabase().getReference(FirebaseKeys.TABLE_RECIPES).child(userId).push();
         recipe.setId(recipesDatabase.getKey());
         recipesDatabase.setValue(recipe, new DatabaseReference.CompletionListener() {
             @Override
@@ -65,7 +65,6 @@ public class FirebaseHelper {
                 callback.onCompleted();
             }
         });
-
     }
 
     public interface LoginUserUserCallback {

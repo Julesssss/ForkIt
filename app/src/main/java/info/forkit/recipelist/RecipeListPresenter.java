@@ -2,6 +2,7 @@ package info.forkit.recipelist;
 
 import java.util.ArrayList;
 
+import info.forkit.ForkIt;
 import info.forkit.model.database.FirebaseHelper;
 import info.forkit.model.objects.Recipe;
 
@@ -39,16 +40,21 @@ public class RecipeListPresenter {
     private void getRecipes() {
         view.showProgressBar(true);
         FirebaseHelper firebaseHelper = new FirebaseHelper(); // todo: dependency injection
-        firebaseHelper.getRecipeList(new FirebaseHelper.LoadRecipesCallback() { // todo: use retrolamda
+        firebaseHelper.getRecipeList(ForkIt.getInstance().getUser().getUid(), new FirebaseHelper.LoadRecipesCallback() { // todo: use retrolamda
             @Override
             public void getRecipes(ArrayList<Recipe> recipes) {
-                view.setRecipes(recipes);
                 view.showProgressBar(false);
+                view.setRecipes(recipes);
+                if (recipes.size() > 0)
+                    view.showEmptyMessage(false);
+                else
+                    view.showEmptyMessage(true);
             }
 
             @Override
             public void onCancelled(String message) {
                 view.showMessage(message);
+                view.showProgressBar(false);
             }
         });
     }

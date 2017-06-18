@@ -2,6 +2,7 @@ package info.forkit.addrecipe;
 
 import android.text.TextUtils;
 
+import info.forkit.ForkIt;
 import info.forkit.model.database.FirebaseHelper;
 import info.forkit.R;
 import info.forkit.model.objects.Recipe;
@@ -32,7 +33,7 @@ public class AddRecipePresenter {
         view.showProgressBar(true);
         Recipe recipe = new Recipe(name);
         FirebaseHelper firebaseHelper = new FirebaseHelper();
-        firebaseHelper.saveNewRecipe(recipe, new FirebaseHelper.SaveRecipeCallback() {
+        firebaseHelper.saveNewRecipe(recipe, ForkIt.getInstance().getUser().getUid(), new FirebaseHelper.SaveRecipeCallback() {
             @Override
             public void onCompleted() {
                 view.showMessage(R.string.add_recipe_message_completed);

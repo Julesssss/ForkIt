@@ -26,6 +26,9 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView, 
     @BindView(R.id.fab_add_recipe)
     FloatingActionButton fabAdd;
 
+    @BindView(R.id.empty_view)
+    View emptyView;
+
     private RecipeListAdapter recipeListAdapter;
     private RecipeListPresenter presenter;
 
@@ -102,6 +105,12 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView, 
     @Override
     public void setRecipes(ArrayList<Recipe> recipes) {
         recipeListAdapter.setRecipes(recipes);
+    }
+
+    @Override
+    public void showEmptyMessage(boolean visible) {
+        if (visible) emptyView.setVisibility(View.VISIBLE);
+        else emptyView.setVisibility(View.GONE);
     }
 
     /**
