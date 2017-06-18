@@ -2,7 +2,6 @@ package info.forkit.recipelist;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,17 +10,17 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import info.forkit.base.BaseActivity;
 import info.forkit.R;
-import info.forkit.model.objects.Recipe;
 import info.forkit.addrecipe.AddRecipeActivity;
+import info.forkit.base.BaseActivity;
+import info.forkit.model.objects.Recipe;
 
 public class RecipeListActivity extends BaseActivity implements RecipeListView, RecipeListAdapter.ListItemCallback {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    @BindView(R.id.progress_bar)
+    @BindView(R.id.progress_view)
     ProgressBar progressBar;
 
     @BindView(R.id.fab_add_recipe)
@@ -103,26 +102,6 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView, 
     @Override
     public void setRecipes(ArrayList<Recipe> recipes) {
         recipeListAdapter.setRecipes(recipes);
-    }
-
-    @Override
-    public void showMessage(final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Snackbar.make(fabAdd, message, Snackbar.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    public void showMessage(final int stringID) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Snackbar.make(fabAdd, getString(stringID), Snackbar.LENGTH_SHORT).show();
-            }
-        });
     }
 
     /**

@@ -1,10 +1,8 @@
 package info.forkit.addrecipe;
 
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import butterknife.BindView;
 import info.forkit.base.BaseActivity;
@@ -18,8 +16,8 @@ public class AddRecipeActivity extends BaseActivity implements AddRecipeView, Vi
     @BindView(R.id.edittext_recipe_name)
     EditText editRecipeName;
 
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
+    @BindView(R.id.progress_view)
+    View progressBar;
 
     private AddRecipePresenter presenter;
 
@@ -74,26 +72,6 @@ public class AddRecipeActivity extends BaseActivity implements AddRecipeView, Vi
                         progressBar.setVisibility(View.GONE);
                     }
                 }
-            }
-        });
-    }
-
-    @Override
-    public void showMessage(final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Snackbar.make(buttonSave, message, Snackbar.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    public void showMessage(final int stringId) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Snackbar.make(buttonSave, getString(stringId), Snackbar.LENGTH_SHORT).show();
             }
         });
     }

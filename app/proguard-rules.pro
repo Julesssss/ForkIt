@@ -33,3 +33,8 @@
 -keep class butterknife.*
 -keepclasseswithmembernames class * { @butterknife.* <methods>; }
 -keepclasseswithmembernames class * { @butterknife.* <fields>; }
+
+
+# Firebase Auth
+-keepattributes Signature
+-keepattributes *Annotation*

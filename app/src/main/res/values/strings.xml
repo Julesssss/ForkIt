@@ -1,9 +1,21 @@
 <resources>
-    <string name="app_name">ForkIt</string>
 
+    <string name="app_name">ForkIt</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Add Recipe page -->
     <string name="add_recipe_activity_title">Add Recipe</string>
     <string name="add_recipe_edittext_name_hint">Recipe name</string>
     <string name="add_recipe_button_label">Save</string>
     <string name="add_recipe_message_completed">Recipe saved!</string>
     <string name="add_recipe_message_name_empty">Please enter a name</string>
+    
+    <!-- Login page -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+
 </resources>
