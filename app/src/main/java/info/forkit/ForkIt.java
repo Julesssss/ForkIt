@@ -26,11 +26,15 @@ public class ForkIt extends Application {
         return database;
     }
 
-     public FirebaseUser getUser() {
+    public FirebaseUser getUser() {
         if (user == null) {
             user = FirebaseAuth.getInstance().getCurrentUser();
         }
         return user;
+    }
+
+    public void clearUser() {
+        user = null;
     }
 
     public static ForkIt getInstance() {

@@ -4,15 +4,20 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import info.forkit.ForkIt;
 import info.forkit.R;
 import info.forkit.addrecipe.AddRecipeActivity;
 import info.forkit.base.BaseActivity;
+import info.forkit.login.LoginActivity;
+import info.forkit.model.database.FirebaseHelper;
 import info.forkit.model.objects.Recipe;
 
 public class RecipeListActivity extends BaseActivity implements RecipeListView, RecipeListAdapter.ListItemCallback {
@@ -40,12 +45,9 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView, 
     @Override
     protected void setUpView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecipeListActivity.this, AddRecipeActivity.class);
-                startActivity(intent);
-            }
+        fabAdd.setOnClickListener(v -> {
+            Intent intent = new Intent(RecipeListActivity.this, AddRecipeActivity.class);
+            startActivity(intent);
         });
         recipeListAdapter = new RecipeListAdapter(this);
         recyclerView.setAdapter(recipeListAdapter);
@@ -88,15 +90,12 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView, 
 
     @Override
     public void showProgressBar(final boolean visible) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressBar != null) {
-                    if (visible) {
-                        progressBar.setVisibility(View.VISIBLE);
-                    } else {
-                        progressBar.setVisibility(View.GONE);
-                    }
+        runOnUiThread(() -> {
+            if (progressBar != null) {
+                if (visible) {
+                    progressBar.setVisibility(View.VISIBLE);
+                } else {
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });
@@ -120,5 +119,32 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView, 
     @Override
     public void listItemClicked(Recipe recipe) {
         presenter.onRecipeClicked(recipe);
+    }
+
+    /**
+     * Settings methods
+     */
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.recipe_list_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.action_logout) {
+            new FirebaseHelper().logoutUser();
+            ForkIt.getInstance().clearUser();
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

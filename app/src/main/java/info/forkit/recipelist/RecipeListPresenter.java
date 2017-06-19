@@ -52,4 +52,5 @@ public class RecipeListPresenter {
     public void onRecipeClicked(Recipe recipe) {
         view.showMessage("Selected: " + recipe.getName());
     }
+
 }

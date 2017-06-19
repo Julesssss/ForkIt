@@ -3,9 +3,10 @@
     <string name="app_name">ForkIt</string>
     <string name="title_activity_login">Sign in</string>
 
-    <!-- Add Recipe page -->
+    <!-- Recipe List page -->
     <string name="recipe_list_empty_title">No Recipes saved!</string>
     <string name="recipe_list_empty_message">Tap the + button to add your first recipe.</string>
+    <string name="recipe_list_menu_logout">Logout</string>
 
     <!-- Add Recipe page -->
     <string name="add_recipe_activity_title">Add Recipe</string>
@@ -21,5 +22,9 @@
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
+
+    <!-- Splash Page -->
+    <string name="splash_text">Fork It!</string>
+    <string name="splash_sub_text">Splash screen</string>
 
 </resources>

@@ -4,8 +4,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuthException;
 
 import info.forkit.model.database.FirebaseHelper;
@@ -43,7 +41,7 @@ public class LoginPresenter {
         }
         if (validated) {
             view.setProgressVisibility(View.VISIBLE);
-            new FirebaseHelper().loginFirebaseUser(email, pass, task -> {
+            new FirebaseHelper().loginUser(email, pass, task -> {
                 if (task.isSuccessful()) {
                     view.openRecipePage();
                 } else {

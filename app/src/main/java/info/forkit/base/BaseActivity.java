@@ -22,9 +22,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected final String TAG = this.getClass().getSimpleName();
 
     private Toolbar toolbar;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseUser firebaseUser; // todo-  move to Application? or DI?
+    protected FirebaseAuth mAuth;
+    protected FirebaseAuth.AuthStateListener mAuthListener;
+    protected FirebaseUser firebaseUser; // todo-  move to Application? or DI?
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,19 +55,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         setSupportActionBar(toolbar);
     }
 
-    private void setUpFirebaseAuth() {
+    protected void setUpFirebaseAuth() {
         mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + firebaseUser.getUid());
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
+        mAuthListener = firebaseAuth -> {
+            firebaseUser = firebaseAuth.getCurrentUser();
+            if (firebaseUser != null) {
+                // User is signed in
+                Log.d(TAG, "onAuthStateChanged:signed_in:" + firebaseUser.getUid());
+            } else {
+                // User is signed out
+                Log.d(TAG, "onAuthStateChanged:signed_out");
             }
         };
     }
@@ -78,25 +75,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void showMessage(final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Snackbar.make(toolbar, message, Snackbar.LENGTH_SHORT).show();
-            }
-        });
+        runOnUiThread(() -> Snackbar.make(toolbar, message, Snackbar.LENGTH_SHORT).show());
     }
 
     @Override
     public void showMessage(final int stringID) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Snackbar.make(toolbar, getString(stringID), Snackbar.LENGTH_SHORT).show();
-            }
-        });
+        runOnUiThread(() -> Snackbar.make(toolbar, getString(stringID), Snackbar.LENGTH_SHORT).show());
     }
 
-    public void hideKeyboard() {
+    protected void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         View view = getCurrentFocus();
         if (view == null) {

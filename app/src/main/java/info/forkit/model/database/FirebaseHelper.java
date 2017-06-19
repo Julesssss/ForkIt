@@ -43,7 +43,7 @@ public class FirebaseHelper extends FirebaseCallbacks {
         recipesDatabase.setValue(recipe, (databaseError, databaseReference) -> callback.onCompleted());
     }
 
-    public void loginFirebaseUser(String email, String password, final LoginSuccess callbackSuccess, final LoginFail callbackFail) {
+    public void loginUser(String email, String password, final LoginSuccess callbackSuccess, final LoginFail callbackFail) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
@@ -53,5 +53,10 @@ public class FirebaseHelper extends FirebaseCallbacks {
                 callbackFail.onFailure(task.getException());
             }
         });
+    }
+
+    public void logoutUser() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signOut();
     }
 }
