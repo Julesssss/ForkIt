@@ -43,33 +43,29 @@ public class LoginPresenter {
         }
         if (validated) {
             view.setProgressVisibility(View.VISIBLE);
-            new FirebaseHelper().loginFirebaseUser(email, pass, new FirebaseHelper.LoginUserUserCallback() {
-                @Override
-                public void onComplete(Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        view.openRecipePage();
-                    } else {
-                        view.showMessage(task.getResult().toString());
-                        view.setLoginViewVisibility(View.VISIBLE);
-                        view.setProgressVisibility(View.GONE);
-                    }
-                }
-
-                @Override
-                public void onFailure(Exception exception) {
+            new FirebaseHelper().loginFirebaseUser(email, pass, task -> {
+                if (task.isSuccessful()) {
+                    view.openRecipePage();
+                } else {
+                    view.showMessage(task.getResult().toString());
                     view.setLoginViewVisibility(View.VISIBLE);
                     view.setProgressVisibility(View.GONE);
-                    if (exception instanceof FirebaseAuthException &&
-                            ((FirebaseAuthException) exception).getErrorCode().equals(ERROR_WRONG_PASSWORD)) {
+                }
+            }, exception -> {
+                view.setLoginViewVisibility(View.VISIBLE);
+                view.setProgressVisibility(View.GONE);
+                if (exception instanceof FirebaseAuthException) {
+                    Log.i(TAG, "FirebaseAuthError: " + ((FirebaseAuthException) exception).getErrorCode());
+                    if (((FirebaseAuthException) exception).getErrorCode().equals(ERROR_WRONG_PASSWORD)) {
                         view.setIncorrectPassword();
-                        Log.i(TAG, "FirebaseAuthError: " + ((FirebaseAuthException) exception).getErrorCode());
                     } else {
                         view.showMessage(exception.getLocalizedMessage());
                     }
+                } else {
+                    view.showMessage(exception.getLocalizedMessage());
                 }
             });
         }
-
     }
 
     private boolean isValidEmail(String email) {
