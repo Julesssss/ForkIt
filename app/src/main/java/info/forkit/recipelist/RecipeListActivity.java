@@ -45,12 +45,12 @@ public class RecipeListActivity extends BaseActivity implements RecipeListView, 
     @Override
     protected void setUpView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recipeListAdapter = new RecipeListAdapter(this);
+        recyclerView.setAdapter(recipeListAdapter);
         fabAdd.setOnClickListener(v -> {
             Intent intent = new Intent(RecipeListActivity.this, AddRecipeActivity.class);
             startActivity(intent);
         });
-        recipeListAdapter = new RecipeListAdapter(this);
-        recyclerView.setAdapter(recipeListAdapter);
 
         attachPresenter();
     }

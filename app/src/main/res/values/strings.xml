@@ -10,10 +10,13 @@
 
     <!-- Add Recipe page -->
     <string name="add_recipe_activity_title">Add Recipe</string>
-    <string name="add_recipe_edittext_name_hint">Recipe name</string>
-    <string name="add_recipe_button_label">Save</string>
+    <string name="add_recipe_edittext_name_hint">Recipe name&#8230;</string>
+    <string name="add_recipe_edittext_ingredient_hint">Add ingredient&#8230;</string>
+    <string name="add_recipe_button_save_recipe">Save</string>
+    <string name="add_recipe_button_add_ingredient">Add</string>
     <string name="add_recipe_message_completed">Recipe saved!</string>
     <string name="add_recipe_message_name_empty">Please enter a name</string>
+    <string name="error_ingredient_empty">No ingredient to add</string>
 
     <!-- Login page -->
     <string name="prompt_email">Email</string>
